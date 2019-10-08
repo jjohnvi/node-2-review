@@ -1,4 +1,5 @@
 let cart = [];
+let id = 0;
 
 let products = [
   {
@@ -29,8 +30,9 @@ let products = [
 ];
 
 const addToCart = (req, res) => {
-  // const { product } = req.body;
-  cart.push(req.body);
+  const index = products.findIndex(val => val.name === req.body.name);
+  cart.push({ ...products[index], cartId: id });
+  id++;
   res.status(200).json(cart);
 };
 
