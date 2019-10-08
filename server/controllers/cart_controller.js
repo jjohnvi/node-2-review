@@ -49,9 +49,25 @@ const removeFromCart = (req, res) => {
   res.status(200).json(cart);
 };
 
+const updateCart = (req, res) => {
+  const { name } = req.body;
+  const updateId = req.params.id;
+  const cartIndex = cart.findIndex(item => item.id == updateId);
+  let item = cart[cartIndex];
+
+  cart[cartIndex] = {
+    id: item.id,
+    name: name || item.name,
+    price: item.price
+  };
+
+  res.status(200).send(cart);
+};
+
 module.exports = {
   addToCart,
   getCart,
   removeFromCart,
-  getProducts
+  getProducts,
+  updateCart
 };
